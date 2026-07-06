@@ -40,8 +40,8 @@ class TestModelPricing:
         p = ModelPricing()
         usage = TokenUsage(input_tokens=1_000_000, output_tokens=1_000_000)
         cost = p.calculate_cost("claude-opus-4-6", usage)
-        # $15/M input + $75/M output = $90
-        assert cost == 90.0
+        # $5/M input + $25/M output = $30
+        assert cost == 30.0
 
     def test_gpt4o_cost_calculation(self) -> None:
         p = ModelPricing()

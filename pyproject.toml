@@ -4,13 +4,13 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bifrost-monitor"
-version = "0.1.0"
+version = "0.2.0"
 description = "Zero-config AI agent observability — one decorator, local SQLite, instant insights"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.11"
 authors = [
-    { name = "Jarrad Bermingham", email = "jarrad.bermingham@gmail.com" },
+    { name = "Jarrad Bermingham", email = "jarrad.bermingham98@gmail.com" },
 ]
 keywords = ["ai", "monitoring", "observability", "agents", "llm", "decorator"]
 classifiers = [

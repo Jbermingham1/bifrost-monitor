@@ -19,24 +19,26 @@ class ModelPrice:
     cache_creation_per_m: float = 0.0
 
 
-# Prices per million tokens (USD) — updated 2025-05
+# Prices per million tokens (USD) — verified against provider pricing pages 2026-07.
+# Anthropic cache pricing: reads = 0.1x input, writes (5-min TTL) = 1.25x input.
 _BUILTIN_PRICES: dict[str, ModelPrice] = {
-    # Anthropic Claude 4.5/4.6
-    "claude-opus-4-6": ModelPrice(15.0, 75.0, 1.5, 18.75),
+    # Anthropic Claude
+    "claude-fable-5": ModelPrice(10.0, 50.0, 1.0, 12.5),
+    "claude-opus-4-8": ModelPrice(5.0, 25.0, 0.5, 6.25),
+    "claude-opus-4-7": ModelPrice(5.0, 25.0, 0.5, 6.25),
+    "claude-opus-4-6": ModelPrice(5.0, 25.0, 0.5, 6.25),
+    "claude-sonnet-5": ModelPrice(3.0, 15.0, 0.3, 3.75),
     "claude-sonnet-4-6": ModelPrice(3.0, 15.0, 0.3, 3.75),
-    "claude-haiku-4-5": ModelPrice(0.8, 4.0, 0.08, 1.0),
-    # Aliases
-    "claude-4-opus": ModelPrice(15.0, 75.0, 1.5, 18.75),
-    "claude-4-sonnet": ModelPrice(3.0, 15.0, 0.3, 3.75),
+    "claude-haiku-4-5": ModelPrice(1.0, 5.0, 0.1, 1.25),
     # OpenAI GPT-4o / GPT-4.1
     "gpt-4o": ModelPrice(2.5, 10.0),
     "gpt-4o-mini": ModelPrice(0.15, 0.6),
     "gpt-4.1": ModelPrice(2.0, 8.0),
     "gpt-4.1-mini": ModelPrice(0.4, 1.6),
     "gpt-4.1-nano": ModelPrice(0.1, 0.4),
-    # Google Gemini 2.5
+    # Google Gemini 2.5 (standard tier, prompts <= 200k tokens)
     "gemini-2.5-pro": ModelPrice(1.25, 10.0),
-    "gemini-2.5-flash": ModelPrice(0.15, 0.6),
+    "gemini-2.5-flash": ModelPrice(0.3, 2.5),
 }
 
 

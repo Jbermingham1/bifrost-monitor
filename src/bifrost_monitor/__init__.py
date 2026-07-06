@@ -5,7 +5,7 @@ from bifrost_monitor.core.tracker import MonitorTracker
 from bifrost_monitor.models.report import CostReport, ErrorSummary, RunSummary
 from bifrost_monitor.models.run import RunFilter, RunRecord, RunStatus, TokenUsage
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = [
     "CostReport",

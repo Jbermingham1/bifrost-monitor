@@ -27,7 +27,7 @@ class TestInMemoryStore:
 
 class TestMonitorTracker:
     def test_record_basic(self) -> None:
-        tracker = MonitorTracker()
+        tracker = MonitorTracker(store=InMemoryStore())
         record = tracker.record(name="my-agent", model="claude-sonnet-4-6")
         assert record.name == "my-agent"
         assert record.model == "claude-sonnet-4-6"
@@ -35,14 +35,14 @@ class TestMonitorTracker:
         assert record.id != ""
 
     def test_record_with_tokens(self) -> None:
-        tracker = MonitorTracker()
+        tracker = MonitorTracker(store=InMemoryStore())
         usage = TokenUsage(input_tokens=1000, output_tokens=500)
         record = tracker.record(name="agent", model="claude-sonnet-4-6", token_usage=usage)
         assert record.token_usage.total_tokens == 1500
         assert record.cost_usd > 0
 
     def test_record_error(self) -> None:
-        tracker = MonitorTracker()
+        tracker = MonitorTracker(store=InMemoryStore())
         record = tracker.record(
             name="agent",
             status=RunStatus.ERROR,
@@ -53,7 +53,7 @@ class TestMonitorTracker:
         assert record.error_type == "ValueError"
 
     def test_record_no_model_zero_cost(self) -> None:
-        tracker = MonitorTracker()
+        tracker = MonitorTracker(store=InMemoryStore())
         record = tracker.record(name="agent")
         assert record.cost_usd == 0.0
 
@@ -65,7 +65,7 @@ class TestMonitorTracker:
         assert len(store.records) == 2
 
     def test_record_with_metadata(self) -> None:
-        tracker = MonitorTracker()
+        tracker = MonitorTracker(store=InMemoryStore())
         record = tracker.record(name="agent", metadata={"env": "prod"})
         assert record.metadata["env"] == "prod"
 

@@ -60,7 +60,14 @@ class MonitorTracker:
         store: RunStore | None = None,
         pricing: ModelPricing | None = None,
     ) -> None:
-        self.store: RunStore = store or InMemoryStore()
+        if store is None:
+            # Zero-config default: persist to the local SQLite database the
+            # CLI reads, exactly as documented. Pass InMemoryStore() for
+            # ephemeral tracking (e.g. tests).
+            from bifrost_monitor.adapters.sqlite import SQLiteStore
+
+            store = SQLiteStore()
+        self.store: RunStore = store
         self.pricing = pricing or ModelPricing()
 
     def record(
